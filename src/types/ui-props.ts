@@ -4,3 +4,9 @@ export type RadioButtonProps = {
   name: string;
   value: string;
 };
+
+export type TextInputProps = {
+  className: string;
+  id: string;
+  placeholder: string;
+}

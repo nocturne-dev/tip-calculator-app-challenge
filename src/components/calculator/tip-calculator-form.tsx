@@ -3,7 +3,8 @@
 import TipCalculatorResults from "./tip-calculator-results";
 import type { RadioButtonProps } from "@/types/ui-props";
 import RadioButton from "../ui/radio-button";
-import { ChangeEvent, useState } from "react";
+import TextInput from "../ui/text-input";
+import { FormEvent } from "react";
 
 const tipPercentages: RadioButtonProps[] = [
   {
@@ -41,20 +42,13 @@ const tipPercentages: RadioButtonProps[] = [
 ];
 
 export default function TipCalculatorForm() {
-  const [isError, setIsError] = useState(false);
-
-  const onBillInputHandler = (e: ChangeEvent<HTMLInputElement>) => {};
-
-  const onBillBlurHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    console.log(isNaN(Number.parseFloat(value.trim())));
-
-    setIsError(isNaN(Number.parseFloat(value.trim())));
+  const onFormResetHandler = (e: FormEvent) => {
+    e.preventDefault();
+    console.log("[onFormReset]", "RESET");
   };
 
   return (
-    <form className="mt-[max(41px,88.961vh-789px)] grid gap-y-8 rounded-t-xl bg-white px-8 pt-[39px] pb-8 md:mx-auto md:mt-[88px] md:max-w-[920px] md:grid-cols-2 md:gap-y-0 md:gap-x-12 md:rounded-xl md:py-8 md:pl-12 md:pr-8">
+    <form className="mt-[max(41px,88.961vh-789px)] grid gap-y-8 rounded-t-xl bg-white px-8 pt-[39px] pb-8 md:mx-auto md:mt-[88px] md:max-w-[920px] md:grid-cols-2 md:gap-y-0 md:gap-x-12 md:rounded-xl md:py-8 md:pl-12 md:pr-8" onSubmit={onFormResetHandler}>
       <section className="grid gap-y-[39px] md:gap-y-[47px] md:pt-5 md:pb-4">
         <p className="m-0 p-0 leading-none">
           <label
@@ -63,15 +57,11 @@ export default function TipCalculatorForm() {
           >
             Bill
           </label>
-          <input
-            className={`mt-[11px] w-full rounded-lg bg-very-light-grayish-cyan py-[10.75px] px-[18px] text-end text-lg leading-none text-very-dark-cyan focus:outline-strong-cyan ${
-              isError ? "outline outline-error" : "outline-none"
-            }`}
+
+          <TextInput
+            className="mt-[11px] w-full rounded-lg bg-very-light-grayish-cyan py-[10.75px] px-[18px] text-end text-lg leading-none text-very-dark-cyan focus:outline-strong-cyan"
             id="bill"
-            inputMode="numeric"
-            onBlur={onBillBlurHandler}
             placeholder="0"
-            type="text"
           />
         </p>
 
@@ -85,11 +75,10 @@ export default function TipCalculatorForm() {
             ))}
 
             <li>
-              <input
+              <TextInput
                 className="w-full rounded-lg bg-very-light-grayish-cyan py-3 px-[18px] text-end text-base leading-none text-very-dark-cyan focus:outline-strong-cyan md:text-center"
                 id="custom"
                 placeholder="Custom"
-                type="text"
               />
             </li>
           </ul>
@@ -102,18 +91,21 @@ export default function TipCalculatorForm() {
           >
             Number of People
           </label>
-          <input
+
+          <TextInput
             className="mt-[11px] w-full rounded-lg bg-very-light-grayish-cyan py-[10.75px] px-[18px] text-end text-lg leading-none text-very-dark-cyan focus:outline-strong-cyan"
             id="people"
             placeholder="0"
-            type="text"
           />
         </p>
       </section>
 
       <section className="grid items-center gap-y-[37.5px] rounded-xl bg-very-dark-cyan px-6 pt-[46px] pb-6 md:gap-y-[61px] md:px-10 md:pt-[60px] md:pb-8">
         <TipCalculatorResults />
-        <button className="rounded-md bg-strong-cyan py-[17px] text-sm uppercase leading-none text-very-dark-cyan hover:bg-light-grayish-cyan hover:text-very-dark-cyan focus:bg-light-grayish-cyan focus:text-very-dark-cyan focus:outline-none active:bg-strong-cyan active:text-very-dark-cyan md:mt-[77px] md:max-h-12">
+        <button
+          className="rounded-md bg-strong-cyan py-[17px] text-sm uppercase leading-none text-very-dark-cyan hover:bg-light-grayish-cyan hover:text-very-dark-cyan focus:bg-light-grayish-cyan focus:text-very-dark-cyan focus:outline-none active:bg-strong-cyan active:text-very-dark-cyan md:mt-[77px] md:max-h-12"
+          type="submit"
+        >
           Reset
         </button>
       </section>
