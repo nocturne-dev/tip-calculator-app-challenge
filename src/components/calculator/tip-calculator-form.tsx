@@ -48,19 +48,18 @@ export default function TipCalculatorForm() {
   };
 
   return (
-    <form className="mt-[max(41px,88.961vh-789px)] grid gap-y-8 rounded-t-xl bg-white px-8 pt-[39px] pb-8 md:mx-auto md:mt-[88px] md:max-w-[920px] md:grid-cols-2 md:gap-y-0 md:gap-x-12 md:rounded-xl md:py-8 md:pl-12 md:pr-8" onSubmit={onFormResetHandler}>
+    <form
+      className="mt-[max(41px,88.961vh-789px)] grid gap-y-8 rounded-t-xl bg-white px-8 pt-[39px] pb-8 md:mx-auto md:mt-[88px] md:max-w-[920px] md:grid-cols-2 md:gap-y-0 md:gap-x-12 md:rounded-xl md:py-8 md:pl-12 md:pr-8"
+      onSubmit={onFormResetHandler}
+    >
       <section className="grid gap-y-[39px] md:gap-y-[47px] md:pt-5 md:pb-4">
         <p className="m-0 p-0 leading-none">
-          <label
-            className="block text-xs leading-none text-grayish-cyan"
-            htmlFor="bill"
-          >
-            Bill
-          </label>
-
           <TextInput
             className="mt-[11px] w-full rounded-lg bg-very-light-grayish-cyan py-[10.75px] px-[18px] text-end text-lg leading-none text-very-dark-cyan focus:outline-strong-cyan"
+            hasErrorFlag={true}
             id="bill"
+            name="Bill"
+            pattern={/[0-9.\B]/}
             placeholder="0"
           />
         </p>
@@ -77,7 +76,9 @@ export default function TipCalculatorForm() {
             <li>
               <TextInput
                 className="w-full rounded-lg bg-very-light-grayish-cyan py-3 px-[18px] text-end text-base leading-none text-very-dark-cyan focus:outline-strong-cyan md:text-center"
+                hasErrorFlag={false}
                 id="custom"
+                pattern={/[0-9\B]/}
                 placeholder="Custom"
               />
             </li>
@@ -85,16 +86,12 @@ export default function TipCalculatorForm() {
         </fieldset>
 
         <p className="m-0 p-0 leading-none">
-          <label
-            className="block text-xs leading-none text-grayish-cyan"
-            htmlFor="people"
-          >
-            Number of People
-          </label>
-
           <TextInput
             className="mt-[11px] w-full rounded-lg bg-very-light-grayish-cyan py-[10.75px] px-[18px] text-end text-lg leading-none text-very-dark-cyan focus:outline-strong-cyan"
+            hasErrorFlag={true}
             id="people"
+            name="Number of People"
+            pattern={/[0-9\B]/}
             placeholder="0"
           />
         </p>

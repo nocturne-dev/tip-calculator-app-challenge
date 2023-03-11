@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="m-0 bg-light-grayish-cyan p-0 font-space-mono">
+      <body className={`m-0 bg-light-grayish-cyan p-0 font-space-mono`}>
         {children}
         {/* <Footer /> */}
       </body>
