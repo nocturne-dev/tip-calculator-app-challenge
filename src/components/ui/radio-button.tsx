@@ -1,4 +1,5 @@
 import type { RadioButtonProps } from "@/types/ui-props";
+import { MouseEvent } from "react";
 
 export default function RadioButton({
   id,
@@ -6,6 +7,11 @@ export default function RadioButton({
   name,
   value,
 }: RadioButtonProps) {
+  const onClickHandler = (e: MouseEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    console.log(value);
+  };
+
   return (
     <li>
       <label
@@ -19,7 +25,7 @@ export default function RadioButton({
           name={name}
           type="radio"
           value={value}
-          onClick={() => console.log(value)}
+          onClick={onClickHandler}
         />
         {label}
       </label>

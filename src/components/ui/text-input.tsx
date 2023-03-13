@@ -1,40 +1,25 @@
+import { useInput } from "@/hooks/use-input";
 import { TextInputProps } from "@/types/ui-props";
+import Image from "next/image";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 
 export default function TextInput({
   className,
+  criteria,
   hasErrorFlag,
   id,
   name,
   pattern,
   placeholder,
 }: TextInputProps) {
-  const [inputValue, setInputValue] = useState<number>(-1);
-  const [hasError, setHasError] = useState<boolean>(false);
-
-  const onBlurHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    const numValue = Number.parseFloat(value.trim());
-
-    setHasError(isNaN(numValue) || numValue <= 0);
-  };
-
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    const numValue = Number.parseFloat(value.trim());
-
-    setInputValue(!isNaN(numValue) ? numValue : -1);
-  };
-
-  const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    const { key } = e;
-
-    if (!pattern.test(key)) {
-      e.preventDefault();
-    }
-  };
+  const {
+    inputValue,
+    hasError,
+    onBlurHandler,
+    onChangeHandler,
+    onFocusHandler,
+    onKeyDownHandler,
+  } = useInput(criteria, pattern);
 
   return (
     <>
@@ -61,6 +46,7 @@ export default function TextInput({
           if (hasErrorFlag) onBlurHandler(e);
         }}
         onChange={onChangeHandler}
+        onFocus={onFocusHandler}
         onKeyDown={onKeyDownHandler}
         placeholder={placeholder}
         type="number"

@@ -55,11 +55,12 @@ export default function TipCalculatorForm() {
       <section className="grid gap-y-[39px] md:gap-y-[47px] md:pt-5 md:pb-4">
         <p className="m-0 p-0 leading-none">
           <TextInput
-            className="mt-[11px] w-full rounded-lg bg-very-light-grayish-cyan py-[10.75px] px-[18px] text-end text-lg leading-none text-very-dark-cyan focus:outline-strong-cyan"
+            className="mt-[11px] w-full rounded-lg bg-very-light-grayish-cyan bg-icon-dollar bg-left bg-no-repeat bg-origin-content py-[10.75px] px-[18px] text-end text-lg leading-none text-very-dark-cyan focus:outline-strong-cyan"
+            criteria={/[0-9.\B\T]/}
             hasErrorFlag={true}
             id="bill"
             name="Bill"
-            pattern={/[0-9.\B]/}
+            pattern={/^\d+\.\d\d\d$/}
             placeholder="0"
           />
         </p>
@@ -76,9 +77,10 @@ export default function TipCalculatorForm() {
             <li>
               <TextInput
                 className="w-full rounded-lg bg-very-light-grayish-cyan py-3 px-[18px] text-end text-base leading-none text-very-dark-cyan focus:outline-strong-cyan md:text-center"
+                criteria={/[0-9\B\T]/}
                 hasErrorFlag={false}
                 id="custom"
-                pattern={/[0-9\B]/}
+                pattern={/^\d{4}$/}
                 placeholder="Custom"
               />
             </li>
@@ -87,11 +89,12 @@ export default function TipCalculatorForm() {
 
         <p className="m-0 p-0 leading-none">
           <TextInput
-            className="mt-[11px] w-full rounded-lg bg-very-light-grayish-cyan py-[10.75px] px-[18px] text-end text-lg leading-none text-very-dark-cyan focus:outline-strong-cyan"
+            className="mt-[11px] w-full rounded-lg bg-very-light-grayish-cyan bg-icon-person bg-left bg-no-repeat bg-origin-content py-[10.75px] px-[18px] text-end text-lg leading-none text-very-dark-cyan focus:outline-strong-cyan"
+            criteria={/[0-9\B\T]/}
             hasErrorFlag={true}
             id="people"
             name="Number of People"
-            pattern={/[0-9\B]/}
+            pattern={/[\D]/}
             placeholder="0"
           />
         </p>

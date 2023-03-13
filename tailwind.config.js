@@ -5,6 +5,10 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      backgroundImage: {
+        "icon-dollar": "url('/images/icon-dollar.svg')",
+        "icon-person": "url('/images/icon-person.svg')",
+      },
       colors: {
         attribution: "hsl(228, 45%, 44%)",
         error: "hsl(12, 33%, 57%)",
