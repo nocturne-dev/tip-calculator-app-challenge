@@ -1,47 +1,84 @@
-import { useState, ChangeEvent, KeyboardEvent } from "react";
+"use client"
+
+import { ChangeEvent, KeyboardEvent, useReducer } from "react";
+
+type InputType = {
+  value: number;
+  hasError: boolean;
+};
+
+const initialInput = {
+  value: -1,
+  hasError: false,
+};
+
+const inputReducer = (
+  state: InputType,
+  action: { type: string; payload: { value: string; expression?: RegExp } }
+): InputType => {
+  const {
+    type: actionType,
+    payload: { value: payloadVal, expression: payloadExpr },
+  } = action;
+
+  switch (actionType) {
+    case "BLUR":
+      let blurValue = Number.parseFloat(payloadVal.trim());
+
+      return { ...state, hasError: isNaN(blurValue) || blurValue <= 0 };
+
+    case "CHANGE":
+      if (payloadExpr && payloadExpr.test(payloadVal.trim())) {
+        return { ...state };
+      }
+
+      let numValue = Number.parseFloat(payloadVal.trim());
+
+      return { ...state, value: !isNaN(numValue) ? numValue : -1 };
+
+    case "FOCUS":
+      return { ...state, hasError: false };
+
+    case "RESET":
+      return initialInput;
+
+    default:
+      return { ...state };
+  }
+};
 
 export const useInput = (criteria: RegExp, pattern: RegExp) => {
-    const [inputValue, setInputValue] = useState<number>(-1);
-    const [hasError, setHasError] = useState<boolean>(false);
 
-    const onBlurHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
+  const [inputState, dispatch] = useReducer(inputReducer, initialInput);
 
-      const numValue = Number.parseFloat(value.trim());
+  const onBlurHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    dispatch({ type: "BLUR", payload: { value } });
+  };
 
-      setHasError(isNaN(numValue) || numValue <= 0);
-    };
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    dispatch({ type: "CHANGE", payload: { value, expression: pattern } });
+  };
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
+  const onFocusHandler = () => {
+    dispatch({ type: "FOCUS", payload: { value: "" } });
+  };
 
-      if (pattern.test(value.trim())) {
-        return;
-      }
+  const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    const { key } = e;
 
-      const numValue = Number.parseFloat(value.trim());
-
-      setInputValue(!isNaN(numValue) ? numValue : -1);
-    };
-
-    const onFocusHandler = () => {
-      setHasError(false);
-    };
-
-    const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-      const { key } = e;
-
-      if (!criteria.test(key) && key !== "ArrowLeft" && key !== "ArrowRight") {
-        e.preventDefault();
-      }
-    };
-
-    return {
-        inputValue,
-        hasError,
-        onBlurHandler,
-        onChangeHandler,
-        onFocusHandler,
-        onKeyDownHandler
+    if (!criteria.test(key) && key !== "ArrowLeft" && key !== "ArrowRight") {
+      e.preventDefault();
     }
-}
+  };
+
+  return {
+    inputValue: inputState.value,
+    hasError: inputState.hasError,
+    onBlurHandler,
+    onChangeHandler,
+    onFocusHandler,
+    onKeyDownHandler,
+  };
+};

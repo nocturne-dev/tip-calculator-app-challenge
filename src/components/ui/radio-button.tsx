@@ -1,3 +1,5 @@
+"use client"
+
 import type { RadioButtonProps } from "@/types/ui-props";
 import { MouseEvent } from "react";
 

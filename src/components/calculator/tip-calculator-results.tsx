@@ -1,3 +1,5 @@
+"use client";
+
 export default function TipCalculatorResults() {
   return (
     <>
@@ -7,7 +9,9 @@ export default function TipCalculatorResults() {
           <p className="text-[8px] leading-none text-grayish-cyan">/ person</p>
         </div>
 
-        <p className="text-end text-2xl leading-none text-strong-cyan md:text-[35px]">{`$0.00`}</p>
+        <p className="text-end text-2xl leading-none text-strong-cyan md:text-[35px]">
+          {`$0.00`}
+        </p>
       </div>
 
       <div className="grid grid-cols-2 items-center">
@@ -16,7 +20,9 @@ export default function TipCalculatorResults() {
           <p className="text-[8px] leading-none text-grayish-cyan">/ person</p>
         </div>
 
-        <p className="text-end text-2xl leading-none text-strong-cyan md:text-[35px]">{`$0.00`}</p>
+        <p className="text-end text-2xl leading-none text-strong-cyan md:text-[35px]">
+          {`$0.00`}
+        </p>
       </div>
     </>
   );

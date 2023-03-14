@@ -1,14 +1,14 @@
+"use client";
+
 import { useInput } from "@/hooks/use-input";
 import { TextInputProps } from "@/types/ui-props";
-import Image from "next/image";
-import { ChangeEvent, KeyboardEvent, useState } from "react";
 
 export default function TextInput({
   className,
   criteria,
   hasErrorFlag,
   id,
-  name,
+  label,
   pattern,
   placeholder,
 }: TextInputProps) {
@@ -23,12 +23,12 @@ export default function TextInput({
 
   return (
     <>
-      {name !== undefined && (
+      {label !== undefined && (
         <label
           className="grid grid-cols-2 text-xs leading-none text-grayish-cyan"
           htmlFor={id}
         >
-          <span className="text-start">{name}</span>
+          <span className="text-start">{label}</span>
 
           {hasError && (
             <span className="text-end text-error">{`Can't be zero`}</span>

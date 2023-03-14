@@ -1,4 +1,5 @@
 import Footer from "@/components/layout/footer";
+import { CalcContextProvider } from "@/context/calculator-context";
 import { Metadata } from "next";
 import "./globals.css";
 
@@ -17,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`m-0 bg-light-grayish-cyan p-0 font-space-mono`}>
-        {children}
+        <CalcContextProvider>{children}</CalcContextProvider>
         {/* <Footer /> */}
       </body>
     </html>

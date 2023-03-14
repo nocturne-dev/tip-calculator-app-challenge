@@ -10,7 +10,8 @@ export type TextInputProps = {
   criteria: RegExp;
   hasErrorFlag: boolean;
   id: string;
-  name?: string;
+  label?: string;
+  name: string;
   pattern: RegExp;
   placeholder: string;
 }

@@ -1,43 +1,42 @@
-"use client";
+"use client"
 
 import TipCalculatorResults from "./tip-calculator-results";
 import type { RadioButtonProps } from "@/types/ui-props";
 import RadioButton from "../ui/radio-button";
 import TextInput from "../ui/text-input";
 import { FormEvent } from "react";
-
 const tipPercentages: RadioButtonProps[] = [
   {
     id: "five",
     label: "5%",
     name: "tip-percentage",
-    value: "0.05",
+    value: "5",
   },
   {
     id: "ten",
     label: "10%",
     name: "tip-percentage",
-    value: "0.10",
+    value: "10",
   },
 
   {
     id: "fifteen",
     label: "15%",
     name: "tip-percentage",
-    value: "0.15",
+    value: "15",
   },
   {
     id: "twenty-five",
     label: "25%",
     name: "tip-percentage",
-    value: "0.25",
+    value: "25",
   },
 
   {
     id: "fifty",
     label: "50%",
     name: "tip-percentage",
-    value: "0.50",
+    value: "50",
   },
 ];
 
@@ -59,7 +58,8 @@ export default function TipCalculatorForm() {
             criteria={/[0-9.\B\T]/}
             hasErrorFlag={true}
             id="bill"
-            name="Bill"
+            label="Bill"
+            name="BILL"
             pattern={/^\d+\.\d\d\d$/}
             placeholder="0"
           />
@@ -80,6 +80,7 @@ export default function TipCalculatorForm() {
                 criteria={/[0-9\B\T]/}
                 hasErrorFlag={false}
                 id="custom"
+                name="TIP"
                 pattern={/^\d{4}$/}
                 placeholder="Custom"
               />
@@ -93,7 +94,8 @@ export default function TipCalculatorForm() {
             criteria={/[0-9\B\T]/}
             hasErrorFlag={true}
             id="people"
-            name="Number of People"
+            label="Number of People"
+            name="PEOPLE"
             pattern={/[\D]/}
             placeholder="0"
           />
