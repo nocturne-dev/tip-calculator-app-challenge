@@ -1,6 +1,13 @@
-"use client"
+"use client";
 
-import { ChangeEvent, KeyboardEvent, useReducer } from "react";
+import { CalcContext } from "@/context/calculator-context";
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
 
 type InputType = {
   value: number;
@@ -47,9 +54,14 @@ const inputReducer = (
   }
 };
 
-export const useInput = (criteria: RegExp, pattern: RegExp) => {
+export const useInput = (criteria: RegExp, pattern: RegExp, name: string) => {
+  const { adjustAmount } = useContext(CalcContext);
 
   const [inputState, dispatch] = useReducer(inputReducer, initialInput);
+
+  useEffect(() => {
+    adjustAmount(name, inputState.value);
+  }, [inputState]);
 
   const onBlurHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -74,7 +86,6 @@ export const useInput = (criteria: RegExp, pattern: RegExp) => {
   };
 
   return {
-    inputValue: inputState.value,
     hasError: inputState.hasError,
     onBlurHandler,
     onChangeHandler,

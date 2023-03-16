@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useState } from "react";
 
 interface ICalc {
   bill: number;
@@ -14,59 +14,66 @@ const initialAmount: ICalc = {
   people: 0,
 };
 
-const contextReducer = (
-  state: ICalc,
-  action: { type: string; payload: number }
-) => {
-  const { type, payload } = action;
-
-  switch (type) {
-    case "BILL":
-      return { ...state, bill: payload > 0 ? payload : 0 };
-    case "TIP":
-      return { ...state, tip: payload > 0 ? payload : 0 };
-    case "PEOPLE":
-      return { ...state, people: payload > 0 ? payload : 0 };
-    default:
-      return { ...state };
-  }
-};
-
 type CalcContextType = {
-  adjustAmount: (type: string, payload: number) => void,
-  tipPerPerson: () => number,
-  totalPerPerson: () => number;
+  adjustAmount: (name: string, payload: number) => void;
+  retrieveAmount: (name: string) => number;
+  tipPerPerson: () => string;
+  totalPerPerson: () => string;
 };
 
 export const CalcContext = createContext<CalcContextType>({
-  adjustAmount: (type: string, payload: number) => {},
-  tipPerPerson: () => 0,
-  totalPerPerson: () => 0,
+  adjustAmount: () => {},
+  retrieveAmount: () => 0,
+  tipPerPerson: () => "",
+  totalPerPerson: () => "",
 });
 
 export const CalcContextProvider = (props: { children: React.ReactNode }) => {
-  const [amountState, dispatch] = useReducer(contextReducer, initialAmount);
+  const [amounts, setAmounts] = useState(initialAmount);
 
-  const { bill, tip, people } = amountState;
+  const { bill, tip, people } = amounts;
 
-  const adjustAmount = (type: string, payload: number) => {
-    dispatch({ type, payload });
+  const adjustAmount = (name: string, payload: number) => {
+    const key = Object.keys(amounts).find(
+      (amount) => amount === name.toLowerCase()
+    );
+
+    if (!key) {
+      return amounts;
+    }
+
+    setAmounts((prev) => ({
+      ...prev,
+      [name.toLowerCase()]: payload > 0 ? payload : 0,
+    }));
+  };
+
+  const retrieveAmount = (name: string) => {
+    const key = Object.keys(amounts).find(
+      (amount) => amount === name.toLowerCase()
+    );
+
+    if (!key) {
+      return 0;
+    }
+
+    return amounts[key as keyof ICalc];
   };
 
   const tipPerPerson = () => {
     if (people <= 0) {
-      return 0;
+      return "0.00";
     }
 
     let newTip = tip / 100;
     newTip = newTip * bill;
     newTip = newTip / people;
-    return newTip;
+    return newTip.toFixed(2);
   };
 
   const totalPerPerson = () => {
     if (people <= 0) {
-      return 0;
+      return "0.00";
     }
 
     let newTip = tip / 100;
@@ -74,11 +81,12 @@ export const CalcContextProvider = (props: { children: React.ReactNode }) => {
 
     let total = bill + newTip;
     total = total / people;
-    return total;
+    return total.toFixed(2);
   };
 
   const context = {
     adjustAmount,
+    retrieveAmount,
     tipPerPerson,
     totalPerPerson,
   };

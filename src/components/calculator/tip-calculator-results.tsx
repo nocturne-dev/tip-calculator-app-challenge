@@ -1,6 +1,11 @@
 "use client";
 
+import { CalcContext } from "@/context/calculator-context";
+import { useContext } from "react";
+
 export default function TipCalculatorResults() {
+  const { tipPerPerson, totalPerPerson } = useContext(CalcContext);
+
   return (
     <>
       <div className="grid grid-cols-2 items-center">
@@ -10,7 +15,7 @@ export default function TipCalculatorResults() {
         </div>
 
         <p className="text-end text-2xl leading-none text-strong-cyan md:text-[35px]">
-          {`$0.00`}
+          ${tipPerPerson()}
         </p>
       </div>
 
@@ -21,7 +26,7 @@ export default function TipCalculatorResults() {
         </div>
 
         <p className="text-end text-2xl leading-none text-strong-cyan md:text-[35px]">
-          {`$0.00`}
+          ${totalPerPerson()}
         </p>
       </div>
     </>

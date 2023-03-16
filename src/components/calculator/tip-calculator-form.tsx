@@ -81,7 +81,7 @@ export default function TipCalculatorForm() {
                 hasErrorFlag={false}
                 id="custom"
                 name="TIP"
-                pattern={/^\d{4}$/}
+                pattern={/[\D]/}
                 placeholder="Custom"
               />
             </li>

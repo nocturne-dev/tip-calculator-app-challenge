@@ -1,7 +1,9 @@
 "use client";
 
+import { CalcContext } from "@/context/calculator-context";
 import { useInput } from "@/hooks/use-input";
 import { TextInputProps } from "@/types/ui-props";
+import { useContext } from "react";
 
 export default function TextInput({
   className,
@@ -9,17 +11,22 @@ export default function TextInput({
   hasErrorFlag,
   id,
   label,
+  name,
   pattern,
   placeholder,
 }: TextInputProps) {
+  const { retrieveAmount } = useContext(CalcContext);
+
   const {
-    inputValue,
+    // inputValue,
     hasError,
     onBlurHandler,
     onChangeHandler,
     onFocusHandler,
     onKeyDownHandler,
-  } = useInput(criteria, pattern);
+  } = useInput(criteria, pattern, name);
+
+  const inputValue = retrieveAmount(name);
 
   return (
     <>
