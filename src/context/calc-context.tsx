@@ -137,8 +137,8 @@ export const CalcContextProvider = (props: { children: React.ReactNode }) => {
       return "0.00";
     }
 
-    let newTip = tipValue / 100;
-    newTip *= billValue;
+    let newTip = (tipValue >= 0 ? tipValue : 0) / 100;
+    newTip *= (billValue >= 0 ? billValue : 0);
     newTip /= peopleValue;
     return newTip.toFixed(2);
   };
@@ -148,8 +148,8 @@ export const CalcContextProvider = (props: { children: React.ReactNode }) => {
       return "0.00";
     }
 
-    let newTip = tipValue / 100;
-    newTip *= billValue;
+    let newTip = (tipValue >= 0 ? tipValue : 0) / 100;
+    newTip *= (billValue >= 0 ? billValue : 0);
 
     let total = billValue + newTip;
     total /= peopleValue;

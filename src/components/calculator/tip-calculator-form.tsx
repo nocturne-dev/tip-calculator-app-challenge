@@ -9,33 +9,33 @@ const tipPercentages: RadioButtonProps[] = [
   {
     id: "five",
     label: "5%",
-    name: "tip-percentage",
+    name: "TIP",
     value: "5",
   },
   {
     id: "ten",
     label: "10%",
-    name: "tip-percentage",
+    name: "TIP",
     value: "10",
   },
 
   {
     id: "fifteen",
     label: "15%",
-    name: "tip-percentage",
+    name: "TIP",
     value: "15",
   },
   {
     id: "twenty-five",
     label: "25%",
-    name: "tip-percentage",
+    name: "TIP",
     value: "25",
   },
 
   {
     id: "fifty",
     label: "50%",
-    name: "tip-percentage",
+    name: "TIP",
     value: "50",
   },
 ];

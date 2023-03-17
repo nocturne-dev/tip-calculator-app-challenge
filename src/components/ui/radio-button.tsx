@@ -1,7 +1,9 @@
 "use client"
 
+import { CalcContext } from "@/context/calc-context";
+import { CalcOperations } from "@/context/calc-context";
 import type { RadioButtonProps } from "@/types/ui-props";
-import { MouseEvent } from "react";
+import { MouseEvent, useContext } from "react";
 
 export default function RadioButton({
   id,
@@ -9,9 +11,11 @@ export default function RadioButton({
   name,
   value,
 }: RadioButtonProps) {
+  const { dispatchAmount } = useContext(CalcContext);
+
   const onClickHandler = (e: MouseEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
-    console.log(value);
+    dispatchAmount(CalcOperations.Change, name, value);
   };
 
   return (
