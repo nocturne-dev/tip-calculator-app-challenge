@@ -1,6 +1,6 @@
 "use client";
 
-import { CalcContext } from "@/context/calculator-context";
+import { CalcContext } from "@/context/calc-context";
 import { useContext } from "react";
 
 export default function TipCalculatorResults() {

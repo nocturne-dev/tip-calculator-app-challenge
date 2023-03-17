@@ -1,5 +1,5 @@
 import Footer from "@/components/layout/footer";
-import { CalcContextProvider } from "@/context/calculator-context";
+import { CalcContextProvider } from "@/context/calc-context";
 import { Metadata } from "next";
 import "./globals.css";
 

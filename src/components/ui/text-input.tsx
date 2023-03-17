@@ -1,6 +1,6 @@
 "use client";
 
-import { CalcContext } from "@/context/calculator-context";
+import { CalcContext } from "@/context/calc-context";
 import { useInput } from "@/hooks/use-input";
 import { TextInputProps } from "@/types/ui-props";
 import { useContext } from "react";
@@ -17,16 +17,10 @@ export default function TextInput({
 }: TextInputProps) {
   const { retrieveAmount } = useContext(CalcContext);
 
-  const {
-    // inputValue,
-    hasError,
-    onBlurHandler,
-    onChangeHandler,
-    onFocusHandler,
-    onKeyDownHandler,
-  } = useInput(criteria, pattern, name);
+  const { onBlurHandler, onChangeHandler, onFocusHandler, onKeyDownHandler } =
+    useInput(criteria, pattern, name);
 
-  const inputValue = retrieveAmount(name);
+  const { value, hasError } = retrieveAmount(name);
 
   return (
     <>
@@ -57,7 +51,7 @@ export default function TextInput({
         onKeyDown={onKeyDownHandler}
         placeholder={placeholder}
         type="number"
-        value={inputValue >= 0 ? inputValue : ""}
+        value={value >= 0 ? value : ""}
       />
     </>
   );
