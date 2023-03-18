@@ -33,6 +33,10 @@ const calcReducer = (
     payload: { name, value, expression },
   } = action;
 
+  if(type === CalcOperations.Reset) {
+    return { ...initialValues };
+  }
+
   const foundEntry = Object.entries(state).find(
     ([key]) => key === name.toLowerCase()
   );
@@ -72,9 +76,6 @@ const calcReducer = (
 
     case CalcOperations.Focus:
       return { ...state, [calcKey]: { ...calcValue, hasError: false } };
-
-    case CalcOperations.Reset:
-      return { ...initialValues };
 
     default:
       return { ...state };

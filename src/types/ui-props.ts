@@ -6,7 +6,7 @@ export type RadioButtonProps = {
 };
 
 export type TextInputProps = {
-  className: string;
+  styles: string;
   criteria: RegExp;
   hasErrorFlag: boolean;
   id: string;

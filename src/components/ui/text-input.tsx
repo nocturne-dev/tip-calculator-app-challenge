@@ -6,7 +6,7 @@ import { TextInputProps } from "@/types/ui-props";
 import { useContext } from "react";
 
 export default function TextInput({
-  className,
+  styles,
   criteria,
   hasErrorFlag,
   id,
@@ -37,7 +37,7 @@ export default function TextInput({
         </label>
       )}
       <input
-        className={`${className} ${
+        className={`${styles} ${
           hasError ? "outline outline-error" : "outline-none"
         }`}
         id={id}
