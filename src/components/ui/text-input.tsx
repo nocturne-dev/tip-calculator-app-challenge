@@ -50,6 +50,7 @@ export default function TextInput({
         onFocus={onFocusHandler}
         onKeyDown={onKeyDownHandler}
         placeholder={placeholder}
+        step={0.01}
         type="number"
         value={value >= 0 ? value : ""}
       />
