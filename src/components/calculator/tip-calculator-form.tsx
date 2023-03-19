@@ -52,10 +52,10 @@ export default function TipCalculatorForm() {
 
   return (
     <form
-      className="grid gap-y-8 rounded-t-xl bg-white px-8 pt-10 pb-8 md:grid-cols-2 md:gap-y-0 md:gap-x-12 md:rounded-xl md:py-8 md:pl-12 md:pr-8"
+      className="grid gap-y-[min(32px,calc(calc(32/9.33)*1vh))] rounded-t-xl bg-white px-8 pt-[min(39px,calc(calc(39/9.33)*1vh))] pb-[min(32px,calc(calc(32/9.33)*1vh))] md:grid-cols-2 md:gap-y-0 md:gap-x-12 md:rounded-xl md:py-[min(32px,calc(calc(32/10.24)*1vh))] md:pl-12 md:pr-8"
       onSubmit={onFormResetHandler}
     >
-      <section className="grid gap-y-10 md:gap-y-12 md:pt-5 md:pb-4">
+      <section className="grid gap-y-[min(39px,calc(calc(39/9.33)*1vh))] md:gap-y-[min(47px,calc(calc(47/10.24)*1vh))] md:py-[min(20px,calc(calc(20/10.24)*1vh))]">
         <p className="m-0 p-0 leading-none">
           <TextInput
             styles="mt-3 w-full rounded-lg bg-very-light-grayish-cyan bg-icon-dollar bg-left bg-no-repeat bg-origin-content py-4 px-5 text-end text-lg leading-none text-very-dark-cyan focus:outline-strong-cyan"
@@ -73,7 +73,7 @@ export default function TipCalculatorForm() {
           <legend className="block text-xs leading-none text-grayish-cyan">
             Select Tip %
           </legend>
-          <ul className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-y-4 md:gap-x-[14px]">
+          <ul className="mt-[min(22px,calc(calc(22/9.33)*1vh))] grid grid-cols-2 gap-y-[min(16px,calc(calc(16/9.33)*1vh))] gap-x-4 md:grid-cols-3 md:gap-x-[14px]">
             {tipPercentages.map((percentage) => (
               <RadioButton key={percentage.id} {...percentage} />
             ))}
@@ -106,11 +106,11 @@ export default function TipCalculatorForm() {
         </p>
       </section>
 
-      <section className="grid items-center gap-y-9 rounded-xl bg-very-dark-cyan px-6 pt-11 pb-6 md:gap-y-10 md:px-10 md:pt-14 md:pb-8">
+      <section className="grid items-center gap-y-[min(36px,calc(calc(36/9.33)*1vh))] rounded-xl bg-very-dark-cyan px-6 pt-[min(46px,calc(calc(46/9.33)*1vh))] pb-[min(24px,calc(calc(24/9.33)*1vh))] md:gap-y-[min(60px,calc(calc(60/10.24)*1vh))] md:px-10 md:pt-[min(60px,calc(calc(60/10.24)*1vh))] md:pb-[min(40px,calc(calc(40/10.24)*1vh))]">
         <TipCalculatorResults />
 
         <button
-          className="rounded-md bg-strong-cyan py-4 text-sm uppercase leading-none text-very-dark-cyan hover:bg-light-grayish-cyan hover:text-very-dark-cyan focus:bg-light-grayish-cyan focus:text-very-dark-cyan focus:outline-none active:bg-strong-cyan active:text-very-dark-cyan md:mt-20 md:max-h-12"
+          className="mt-[min(3px,calc(calc(3/9.33)*1vh))] rounded-md bg-strong-cyan py-4 text-sm uppercase leading-none text-very-dark-cyan hover:bg-light-grayish-cyan hover:text-very-dark-cyan focus:bg-light-grayish-cyan focus:text-very-dark-cyan focus:outline-none active:bg-strong-cyan active:text-very-dark-cyan md:mt-[min(78px,calc(calc(78/10.24)*1vh))] md:max-h-12"
           type="submit"
         >
           Reset
